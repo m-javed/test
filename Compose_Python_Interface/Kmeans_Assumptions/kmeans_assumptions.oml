@@ -1,0 +1,65 @@
+%Kmeans Assumptions
+cwd = fileparts(omlfilename('fullpath'));
+evalpythonfile([cwd,'/kmeans_assumptions.py']);
+[y_pred1, s_yp, e_yp] = getpythonvar('y_pred1');
+[y_pred2, s_yp, e_yp] = getpythonvar('y_pred2');
+[y_pred3, s_yp, e_yp] = getpythonvar('y_pred3');
+[y_pred4, s_yp, e_yp] = getpythonvar('y_pred4');
+[X, s_x, e_x] = getpythonvar('X');
+[X_aniso, s_xa, e_xa] = getpythonvar('X_aniso');
+[X_varied, s_xv, e_xv] = getpythonvar('X_varied');
+[X_filtered,s_xf,e_xf] = getpythonvar('X_filtered');
+
+%need sorting to assign colors according to clusters
+
+function varargout = sort_cluster(x , y)
+	[y_s,idx] = sort(y);
+	for i =1:length(idx)
+		x_s(i,:) =x(idx(i),:);
+	end
+	n1 = find(y_s,1,'first');
+	y_s1 = y_s - ones(size(y_s));
+	n2 = find(y_s1(1,n1:end),1,'first')+n1-1;
+	varargout{1} = x_s;
+	varargout{2} = n1;
+	varargout{3} = n2;
+end
+
+%Plot Incorrect number of clusters
+[X_s, n] = sort_cluster(X,y_pred1);
+subplot(2,2,1);
+scatter(X_s(1:n-1,1),X_s(1:n-1,2),'bo');
+hold('on')
+scatter(X_s(n:end,1),X_s(n:end,2),'ro');
+title('Incorrect Number of Blobs');
+hold('off')
+
+%Plot Anisotropicly distributed data
+[X_aniso_s , n1, n2] = sort_cluster(X_aniso,y_pred2);
+subplot(2,2,2);
+scatter(X_aniso_s(1:n1-1,1),X_aniso_s(1:n1-1,2),'bo');
+hold('on')
+scatter(X_aniso_s(n1:n2-1,1),X_aniso_s(n1:n2-1,2),'go');
+scatter(X_aniso_s(n2:end,1),X_aniso_s(n2:end,2),'ro');
+title('Anisotropicly Distributed Blobs');
+hold('off')
+
+%Plot Different variance
+[X_varied_s , n1, n2] = sort_cluster(X_varied,y_pred3);
+subplot(2,2,3);
+scatter(X_varied_s(1:n1-1,1),X_varied_s(1:n1-1,2),'bo');
+hold('on')
+scatter(X_varied_s(n1:n2-1,1),X_varied_s(n1:n2-1,2),'go');
+scatter(X_varied_s(n2:end,1),X_varied_s(n2:end,2),'ro');
+title('Unequal Variance');
+hold('off')
+
+%Plot Unevenly sized blobs
+[X_filtered_s , n1, n2] = sort_cluster(X_filtered,y_pred4);
+subplot(2,2,4);
+scatter(X_filtered_s(1:n1-1,1),X_filtered_s(1:n1-1,2),'bo');
+hold('on')
+scatter(X_filtered_s(n1:n2-1,1),X_filtered_s(n1:n2-1,2),'go');
+scatter(X_filtered_s(n2:end,1),X_filtered_s(n2:end,2),'ro');
+title('Unevenly sized blobs');
+hold('off')

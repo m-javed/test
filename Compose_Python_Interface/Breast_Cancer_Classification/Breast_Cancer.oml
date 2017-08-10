@@ -3,7 +3,7 @@ cwd = fileparts(omlfilename('fullpath'));
 evalpythonfile([cwd,'/Breast_Cancer.py']);
 [scores,s_c,e_c] = getpythonvar('scores');
 [accu,s_a,e_a] = getpythonvar('accu');
-printf('Overall Prediction Accuracy:%.2f\n',accu)
+printf('Overall Prediction Accuracy:%.2f\n',accu);
 printf('\n--Training and Test Accuracy by target value--\n');
 printf('Training Accuracy for Malignant cells: %.2f\n',scores{1});
 printf('Training Accuracy for Benign cells: %.2f\n',scores{2});
