@@ -1,0 +1,39 @@
+%Run the python file
+cwd = fileparts(omlfilename('fullpath'));
+evalpythonfile ([cwd,'/California_Houses_Pricing.py']);
+[X_test,s_xt,e_xt] = getpythonvar('X_test');
+[y_predict,s_yp,e_yp] = getpythonvar('y_predict');
+[y_test,s_yt,e_yt] = getpythonvar('y_test');
+[feat_imp,s_fi,e_fi] = getpythonvar('f_i');
+
+%plot Actual vs predicted prices
+close('all');
+x =[1:20];
+plot(x,y_predict(1,1:20));
+hold('on')
+plot(x,y_test(1,1:20));
+title('Predicted vs Actual House Price');
+legend('Predicted','Actual');
+xlabel('House#');
+ylabel('Price');
+hold('off')
+
+%plot featues vs price
+figure;
+scatter(X_test(:,1),y_test);
+title('House Price Dependency on Average Income');
+xlabel('Average Income');
+ylabel('Price');
+
+figure;
+scatter(X_test(:,2),y_test);
+title('House Price Dependency on House Age');
+xlabel('House Age');
+ylabel('Price');
+
+figure;
+scatter(X_test(:,6),y_test);
+title('House Price Dependency on Average Number of Occupants');
+xlabel('Average Occupancy');
+xlim([1 6])
+ylabel('Price');
