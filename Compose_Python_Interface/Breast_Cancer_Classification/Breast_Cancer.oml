@@ -1,0 +1,17 @@
+%Breast Cancer Dataset Classification
+cwd = fileparts(omlfilename('fullpath'));
+evalpythonfile([cwd,'/Breast_Cancer.py']);
+[scores,s_c,e_c] = getpythonvar('scores');
+[accu,s_a,e_a] = getpythonvar('accu');
+printf('Overall Prediction Accuracy:%.2f\n',accu)
+printf('\n--Training and Test Accuracy by target value--\n');
+printf('Training Accuracy for Malignant cells: %.2f\n',scores{1});
+printf('Training Accuracy for Benign cells: %.2f\n',scores{2});
+printf('Test Accuracy for Malignant cells: %.2f\n',scores{3});
+printf('Test Accuracy for Benign cells: %.2f\n',scores{4});
+x = [1:length(scores)];
+y = [scores{1}, scores{2}, scores{3}, scores{4}];
+bar(x,y,'facecolor', [30 100 100]);
+title('Training and Test Accuracy by Target Value');
+ylabel('Accuracy');
+xlabel('1:Malignant Training  2:Benign Training  3:Malignant Test  4:Benign Test');
