@@ -53,7 +53,7 @@ def create_test_data():
         img_data = cv2.resize(img_data, (IMG_SIZE, IMG_SIZE))
         testing_data.append([np.array(img_data), img_num])
 
-    shuffle(testing_data)
+    #shuffle(testing_data)
     np.save('test_data.npy', testing_data)
     return testing_data
 
@@ -190,6 +190,7 @@ for num, data in enumerate(test_data):# replace test_data with test_data[:n] for
     else:
         str_label = 'Cat'
     #print(str_label)
+    predicted_labels+= "%s\t"%img_num
     predicted_labels+= "%s\n"%str_label
 with open('predicted_labels.txt', 'w') as file:
     file.write(predicted_labels)
