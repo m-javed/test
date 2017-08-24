@@ -21,6 +21,11 @@ Please use the 'fit model only once and save the model for later use' section to
 
 If some machine doesn't have graphics support, please use the 'Save predicted labels to text file' section and manually compare the predicted labels with the corresponding images.
 
+Example Predicted Labels
+--------------------------
+Here are some of the test images with their corresponding predicted labels.
+![Image not found!](/images/predicted_labels.png)
+
 > **Note:** You need to rename folders containing train images to **'train'** and test images to **'test'**
 > - **Cats vs Dogs** dataset can be downloaded [here](https://www.kaggle.com/c/dogs-vs-cats)
 > - You can find more information about **tensorflow** library [here](http://tensorflow.org/)
