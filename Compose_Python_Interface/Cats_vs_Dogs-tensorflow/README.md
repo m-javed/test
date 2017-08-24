@@ -24,7 +24,7 @@ If some machine doesn't have graphics support, please use the 'Save predicted la
 Example Predicted Labels
 --------------------------
 Here are some of the test images with their corresponding predicted labels.
-![Image not found!](/images/predicted_labels.png)
+![Image not found!](./images/predicted_labels.png)
 
 > **Note:** You need to rename folders containing train images to **'train'** and test images to **'test'**
 > - **Cats vs Dogs** dataset can be downloaded [here](https://www.kaggle.com/c/dogs-vs-cats)
